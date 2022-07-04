@@ -49,7 +49,7 @@ class ClusterListenerActor extends AbstractBehavior<ClusterEvent.ClusterDomainEv
   }
 
   private Behavior<ClusterEvent.ClusterDomainEvent> logClusterEvent(Object clusterEventMessage) {
-    log.info("{} sent to {}", clusterEventMessage, cluster.selfMember());
+    log.info("{} sent to a {}", clusterEventMessage, cluster.selfMember());
     logClusterMembers();
 
     return Behaviors.same();

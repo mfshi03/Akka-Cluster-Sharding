@@ -48,7 +48,7 @@ import akka.stream.javadsl.Flow;
 import cluster.HttpServer.ServerActivitySummary.ServerActivity;
 
 class HttpServer {
-  private final ActorSystem<?> actorSystem;
+  private final ActorSystem<?> actorSystem; //a group of actors that share common properties
   private ClusterAwareStatistics clusterAwareStatistics;
   private SingletonAwareStatistics singletonAwareStatistics;
   private final Tree tree = new Tree("cluster", "cluster");

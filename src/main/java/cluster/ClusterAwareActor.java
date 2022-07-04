@@ -105,7 +105,7 @@ public class ClusterAwareActor extends AbstractBehavior<ClusterAwareActor.Messag
 
   private void pingUpColleagues() {
     final var context = getContext();
-
+    logInfoIf(true,"Status: {}" , Cluster.get(getContext().getSystem()).selfMember().status().toString());
     if (iAmUp()) {
       final var size = serviceInstances.size() - 1;
       logInfoIf(pingStatistics.totalPings % 100 == 0, "Tick, ping {}", Math.max(size, 0));
@@ -122,6 +122,8 @@ public class ClusterAwareActor extends AbstractBehavior<ClusterAwareActor.Messag
   }
 
   private boolean iAmUp() {
+    //return true;
+    log().info("Status: " + Cluster.get(getContext().getSystem()).selfMember().status().toString());
     return Cluster.get(getContext().getSystem()).selfMember().status().equals(MemberStatus.up());
   }
 

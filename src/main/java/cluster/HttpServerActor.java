@@ -61,7 +61,9 @@ class HttpServerActor {
 
   private Behavior<HttpServer.Statistics> onBroadcastEntityAction(BroadcastEntityAction broadcastEntityAction) {
     serviceInstances.stream()
-        .forEach(httpServerActorRef -> httpServerActorRef.tell(broadcastEntityAction.entityAction));
+        .forEach(httpServerActorRef -> {
+          httpServerActorRef.tell(broadcastEntityAction.entityAction);
+        });
     return Behaviors.same();
   }
 
@@ -72,6 +74,7 @@ class HttpServerActor {
   }
 
   private Logger log() {
+    System.out.println(actorContext);
     return actorContext.getLog();
   }
 

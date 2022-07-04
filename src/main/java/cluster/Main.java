@@ -33,8 +33,8 @@ class Main {
 
     context.spawn(ClusterAwareActor.create(httpServerActorRef), ClusterAwareActor.class.getSimpleName());
     context.spawn(ClusterSingletonAwareActor.create(httpServerActorRef), ClusterSingletonAwareActor.class.getSimpleName());
-    context.spawn(EntityCommandActor.create(), EntityCommandActor.class.getSimpleName());
-    context.spawn(EntityQueryActor.create(), EntityQueryActor.class.getSimpleName());
+    context.spawn(BankEntityCommandActor.create(), BankEntityCommandActor.class.getSimpleName());
+    context.spawn(BankEntityQueryActor.create(), BankEntityQueryActor.class.getSimpleName());
 
     startClusterSharding(context.getSystem(), httpServerActorRef);
   }
@@ -69,11 +69,11 @@ class Main {
     final var clusterSharding = ClusterSharding.get(actorSystem);
     clusterSharding.init(
       Entity.of(
-        EntityActor.entityTypeKey,
+        BankEntityActor.entityTypeKey,
         entityContext ->
-          EntityActor.create(entityContext.getEntityId(), httpServerActorRef)
+          BankEntityActor.create(entityContext.getEntityId(), httpServerActorRef)
       )
-      .withStopMessage(EntityActor.Passivate.INSTANCE)
+      .withStopMessage(BankEntityActor.Passivate.INSTANCE)
     );
   }
 }

@@ -48,7 +48,9 @@ class EntityCommandActor extends AbstractBehavior<EntityActor.Command> {
     final var entityId = EntityActor.entityId(nodePort, (int) Math.round(Math.random() * entitiesPerNode));
     final var id = new EntityActor.Id(entityId);
     final var value = new EntityActor.Value(new Date());
+    /*The entityRef is the reference for that entity calculate with cluster sharding*/
     final var entityRef = clusterSharding.entityRefFor(EntityActor.entityTypeKey, entityId);
+    /*Giving the return address with getSelf*/
     entityRef.tell(new EntityActor.ChangeValue(id, value, actorContext.getSelf()));
     return this;
   }

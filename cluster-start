@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Use this script to run 1 to 9 Akka cluster nodes. The command line parameter none or number from 1 to 9. Each of the
+# Use this script to run 1 to 9 Akka acluster nodes. The command line parameter none or number from 1 to 9. Each of the
 # node's JVMs is started as a background process. Each process logs both stdin and stderr to a file located in
 # the /tmp directory. The log file name is derived from the current directory name with a suffix of "-N.log",
 # N is the node number. The Akka port number is set to 255N, N is the node number.

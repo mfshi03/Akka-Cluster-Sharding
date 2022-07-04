@@ -22,7 +22,7 @@ import akka.cluster.typed.SingletonActor;
 class ClusterSingletonAwareActor extends AbstractBehavior<ClusterSingletonAwareActor.Message> {
   private final ActorRef<Message> clusterSingletonProxy;
   private final ActorRef<HttpServer.Statistics> httpServerActor;
-  private final Duration tickInterval = Duration.ofMillis(25 + Math.round(50 * Math.random())); // avg 50ms per tick
+  private final Duration tickInterval = Duration.ofMillis(25 + Math.round(100)); // avg 100ms per tick
   private final int port;
 
   static Behavior<Message> create(ActorRef<HttpServer.Statistics> httpServerActor) {
@@ -35,7 +35,6 @@ class ClusterSingletonAwareActor extends AbstractBehavior<ClusterSingletonAwareA
     this.httpServerActor = httpServerActor;
     final var selfAddress = Cluster.get(actorContext.getSystem()).selfAddress();
     port = selfAddress.getPort().orElse(-1);
-
     clusterSingletonProxy = ClusterSingleton.get(actorContext.getSystem())
         .init(SingletonActor.of(ClusterSingletonActor.create(), ClusterSingletonActor.class.getSimpleName()));
     timers.startTimerAtFixedRate(Tick.Instance, tickInterval);

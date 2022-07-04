@@ -154,7 +154,7 @@ The `onNotifyEntityAction` method updates the information used in the web cluste
 Messages are sent to entity actors from two other actors, `EntityCommandActor` and `EntityQueryActor`. These two actors use a timer to send command and query messages to random entity actors periodically.
 
 ~~~java
-  private Behavior<EntityActor.Command> onTick() {
+  private Behavior<EntityActor.Command> () {
     final String entityId = EntityActor.entityId(nodePort, (int) Math.round(Math.random() * entitiesPerNode));
     final EntityActor.Id id = new EntityActor.Id(entityId);
     final EntityActor.Value value = new EntityActor.Value(new Date());
