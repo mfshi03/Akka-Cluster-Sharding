@@ -55,10 +55,10 @@ class BankEntityActor extends AbstractBehavior<BankEntityActor.Command> {
             changeValue.replyTo.tell(new ChangeValueAck("initialize", changeValue.id, changeValue.value, changeValue.amount));
             notifyHttpServer("start", changeValue.replyTo);
         } else {
-            log().info("update {} {} -> {}", state.id, state.value, changeValue.value);
             state.value = changeValue.value;
-            state.amount = changeValue.amount;
-            changeValue.replyTo.tell(new ChangeValueAck("update", changeValue.id, changeValue.value, changeValue.amount));
+            state.amount = state.amount + 1;
+            log().info("update {} {} {} -> {}", state.id, state.value, state.amount, changeValue.value);
+            changeValue.replyTo.tell(new ChangeValueAck("update", changeValue.id, changeValue.value, state.amount));
             notifyHttpServer("ping", changeValue.replyTo);
         }
         return this;
@@ -243,6 +243,20 @@ class BankEntityActor extends AbstractBehavior<BankEntityActor.Command> {
         @Override
         public String toString() {
             return String.format("%s[%s]", getClass().getSimpleName(), value);
+        }
+    }
+
+    static class Amount implements CborSerializable {
+        final Integer amount;
+
+        @JsonCreator
+        Amount(Integer amount) {
+            this.amount = amount;
+        }
+
+        @Override
+        public String toString() {
+            return String.format("%s[%s]", getClass().getSimpleName(), amount);
         }
     }
 

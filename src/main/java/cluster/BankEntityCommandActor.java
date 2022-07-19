@@ -19,7 +19,6 @@ class BankEntityCommandActor extends AbstractBehavior<BankEntityActor.Command> {
     private final ClusterSharding clusterSharding;
     private final int entitiesPerNode;
     private final Integer nodePort;
-
     static Behavior<BankEntityActor.Command> create() {
         return Behaviors.setup(actorContext ->
                 Behaviors.withTimers(timer -> new BankEntityCommandActor(actorContext, timer)));
@@ -48,15 +47,16 @@ class BankEntityCommandActor extends AbstractBehavior<BankEntityActor.Command> {
         final var entityId = BankEntityActor.entityId(nodePort, (int) Math.round(Math.random() * entitiesPerNode));
         final var id = new BankEntityActor.Id(entityId);
         final var value = new BankEntityActor.Value(new Date());
-        final var amount = new Integer(5);
+        final var amount = new Integer(0);
         /*The entityRef is the reference for that entity calculate with cluster sharding*/
         final var entityRef = clusterSharding.entityRefFor(BankEntityActor.entityTypeKey, entityId);
         /*Giving the return address with getSelf*/
         entityRef.tell(new BankEntityActor.ChangeValue(id, value,amount, actorContext.getSelf()));
+
         return this;
     }
 
-    private Behavior<BankEntityActor.Command> onChangeValueAck(BankEntityActor.ChangeValueAck changeValueAck) {
+    private Behavior<BankEntityActor.Command> onChangeValueAck(BankEntityActor.ChangeValueAck changeValueAck) { /* Comment Flag: This logs when the command to change the entity value occurs */
         log().info("onChangeValue: {}", changeValueAck);
         return this;
     }

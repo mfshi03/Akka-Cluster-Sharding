@@ -1,4 +1,5 @@
 // https://d3js.org v5.7.0 Copyright 2018 Mike Bostock
+/* Comment Flag: This helps with web page visualizations with node and the tree*/
 (function (global, factory) {
 typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
 typeof define === 'function' && define.amd ? define(['exports'], factory) :
@@ -10554,7 +10555,7 @@ function node_links() {
   return links;
 }
 
-function hierarchy(data, children) {
+function hierarchy(data, children) {  /* Comment Flag: This instantiates a new node with value for the simulation.*/
   var root = new Node(data),
       valued = +data.value && (root.value = data.value),
       node,

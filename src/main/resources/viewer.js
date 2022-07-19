@@ -1,7 +1,7 @@
 var webSocket;
 var svgHasFocus = true;
 
-function sendWebSocketRequest(request) {
+function sendWebSocketRequest(request) { /* Comment Flag: WebSocket retrieve data that is added to the tree*/
   if (webSocket && webSocket.readyState == WebSocket.OPEN) {
     webSocket.send(request);
   } else {
@@ -14,7 +14,7 @@ function sendWebSocketRequest(request) {
     };
 
     webSocket.onmessage = function (event) {
-      console.log(event);
+      console.log('Websocket message: ', event);
       const root = JSON.parse(event.data);
       if (svgHasFocus) {
         update(root);
@@ -45,10 +45,10 @@ const widthCount = grid * 4;
 
 const messageCountLast = { count: 0, time: new Date() };
 
-const svg = d3.select('svg').style('width', width).style('height', height).style('padding', '0px').style('box-sizing', 'border-box').style('font', 'sans-serif');
+const svg = d3.select('svg').style('width', width).style('height', height).style('padding', '0px').style('box-sizing', 'border-box').style('font', 'serif');
 
 svg.append('rect').attr('width', '100%').attr('height', '100%').attr('fill', '#001017');
-
+/*Comment Flag: We can use .attr to represent classes and transformation within the DOM object */
 const g = svg.append('g').attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
 const gMembers = g.append('g').attr('class', 'members');
 const gLink = g.append('g').attr('class', 'links').attr('fill', 'none').attr('stroke', '#555').attr('stroke-opacity', '0.4').attr('stroke-width', 1.5);
@@ -59,7 +59,7 @@ const gStatistics = g.append('g').attr('class', 'statistics');
 sendWebSocketRequest();
 setInterval(sendWebSocketRequest, 5000);
 
-function update(data) {
+function update(data) { /* Comment Flag:  Handles change logic for events within the visualization */
   const shardingData = tree(d3.hierarchy(data.tree));
 
   updateServerLinks(data.serverActivities, shardingData.links());
@@ -312,7 +312,7 @@ function updateStatistics(data, shardingDataLinks) {
   const labelsValues = [];
 
   if (entityCount > 0) {
-    labelsValues.push({ x: x, y: y, label: 'Entity count', value: entityCount.toLocaleString() });
+    labelsValues.push({ x: x, y: y, label: 'Entity count', value: entityCount.toLocaleString(), stuff:  });
     labelsValues.push({ x: x, y: y + grid + margin, label: 'Message count', value: messageCount.toLocaleString() });
     labelsValues.push({ x: x, y: y + 2 * (grid + margin), label: 'Message rate', value: messageRatePerSecond.toLocaleString() + '/s' });
   }
@@ -454,7 +454,7 @@ function clickMember(d) {
   sendWebSocketRequest(d.address);
 }
 
-const hiddenMemberLinkViews = [];
+const hiddenMemberLinkViews = []; /* Comment flag :Represent th cluster node that are shown by the visualizer */
 
 function toggleMemberLinkView(d) {
   const i = hiddenMemberLinkViews.indexOf(d.data.name);

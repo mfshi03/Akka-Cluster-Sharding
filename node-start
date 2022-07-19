@@ -1,5 +1,6 @@
 #!/bin/bash
 
+#Comment Flag: This scripts starts cluster nodes
 # Use this script to start one or more Akka cluster nodes. The command line parameters must be from 1 to 9. The
 # node's JVMs is started as a background process. The process logs both stdin and stderr to a file located in
 # the /tmp directory. The log file name is derived from the current directory name with a suffix of "-N.log",
@@ -31,7 +32,7 @@ startNode() {
   port="255"$node
   export akka_management_http_port="855"$node
   echo "Start node $1 on port $port, management port $akka_management_http_port, HTTP port 955$node"
-  java -jar "$jarFilename" "$port" &> /tmp/"$scriptFilename"-"$node".log &
+  java -jar "$jarFilename" "$port" &> /Users/michaelshi/Documents/logs/"$scriptFilename"-"$node".log & #Comment flag: filepath for log files
 }
 
 [ $# -eq 0 ] && usage

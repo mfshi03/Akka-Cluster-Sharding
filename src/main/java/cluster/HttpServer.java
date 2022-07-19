@@ -47,7 +47,7 @@ import akka.japi.JavaPartialFunction;
 import akka.stream.javadsl.Flow;
 import cluster.HttpServer.ServerActivitySummary.ServerActivity;
 
-class HttpServer {
+class HttpServer { /*Comment Flag: HttpServer handles incoming ./akka commands to clusters */
   private final ActorSystem<?> actorSystem; //a group of actors that share common properties
   private ClusterAwareStatistics clusterAwareStatistics;
   private SingletonAwareStatistics singletonAwareStatistics;
@@ -272,7 +272,7 @@ class HttpServer {
     }
   }
 
-  void load(EntityAction entityAction) {
+  void load(EntityAction entityAction) {  /* Comment Flag: An entity action can control when cluster stop and start. EntityAction must be related to ./akka commands */
     try {
       switch (entityAction.action) {
       case "start":

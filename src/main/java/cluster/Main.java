@@ -28,7 +28,7 @@ class Main {
 
   private static void bootstrap(final ActorContext<Void> context) {
     context.spawn(ClusterListenerActor.create(), "clusterListener");
-
+    // Comment Flag: An Actor Reference is like url that allows the cluster to communicate with the actor
     final var httpServerActorRef = context.spawn(HttpServerActor.create(), HttpServerActor.class.getSimpleName());
 
     context.spawn(ClusterAwareActor.create(httpServerActorRef), ClusterAwareActor.class.getSimpleName());
@@ -55,6 +55,7 @@ class Main {
     final var localhost1 = "127.0.0.1";
     final var localhost2 = "127.0.0.2";
     final var hostname = useLocalhost2 && port.compareTo("2555") > 0 ? localhost2 : localhost1;
+    /* Comment Flag: Opens TCP port */
     return ConfigFactory
         .parseString(String.format("akka.remote.artery.canonical.hostname = \"%s\"%n", hostname)
             + String.format("akka.remote.artery.canonical.port=%s%n", port)
