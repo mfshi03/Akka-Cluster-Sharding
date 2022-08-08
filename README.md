@@ -9,6 +9,7 @@ Additions
 
 Added querying functionality to the visualization to count ping statistics (will probably add more statistics querying)
 
+![Additions](https://github.com/mfshi03/Akka-Cluster-Sharding/docs/images/Screen Shot 2022-08-07 at 9.53.05 PM.png?raw=true)
 Next Up
 
 Probably adding some stuff to the CLI
