@@ -1,4 +1,4 @@
-# Akka Typed Java Cluster Sharding Example
+# Akka Cluster Sharding
 
 Inspiration 
 
