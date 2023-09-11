@@ -312,7 +312,7 @@ function updateStatistics(data, shardingDataLinks) {
   const labelsValues = [];
 
   if (entityCount > 0) {
-    labelsValues.push({ x: x, y: y, label: 'Entity count', value: entityCount.toLocaleString(), stuff:  });
+    labelsValues.push({ x: x, y: y, label: 'Entity count', value: entityCount.toLocaleString(), stuff: "water" });
     labelsValues.push({ x: x, y: y + grid + margin, label: 'Message count', value: messageCount.toLocaleString() });
     labelsValues.push({ x: x, y: y + 2 * (grid + margin), label: 'Message rate', value: messageRatePerSecond.toLocaleString() + '/s' });
   }
