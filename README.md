@@ -11,10 +11,7 @@ Added querying functionality to the visualization to count ping statistics (will
 
 ![alt text](https://github.com/mfshi03/Akka-Cluster-Sharding/blob/main/docs/images/Screen%20Shot%202022-08-07%20at%209.53.05%20PM.png?raw=true)
 
-Next Up
-
-Probably adding some stuff to the CLI
-
-Add a way to display values and change values of individual entitities like a real API server
-
-Custom-made cluster-sharding algorithm
+Next up:
+- [ ] Probably adding some stuff to the CLI
+- [ ] Add a way to display values and change values of individual entitities like a real API server
+- [ ] Custom-made cluster-sharding algorithm
